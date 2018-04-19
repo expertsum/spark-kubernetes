@@ -7,8 +7,6 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - name: applicationui
-    port: 4040
   - name: master
     port: 7077
   - name: webui

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-notebook
+  labels:
+    app: jupyter-notebook
+spec:
+  clusterIP: None
+  ports:
+  - name: notebook
+    port: 8888
+  - name: webui
+    port: 4040
+  selector:
+    app: jupyter-notebook

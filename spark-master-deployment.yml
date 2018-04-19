@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: spark-master
-        image: gcr.io/spark-cluster-k8s/spark-base:latest  # or just image: redis
-        command: ["/opt/spark/sbin/start-master.sh"]
+        image: elopezdelara/miniconda3-spark:latest
+        command:
+        - start-master.sh
         resources:
           requests:
-            cpu: 500m
-            memory: 1Gi
+            cpu: 100m
+            memory: 512Mi
         ports:
-        - containerPort: 4040
         - containerPort: 7077
         - containerPort: 8080

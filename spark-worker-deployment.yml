@@ -14,13 +14,14 @@ spec:
     spec:
       containers:
       - name: spark-worker
-        image: gcr.io/spark-cluster-k8s/spark-base:latest  # or just image: redis
-        command: ["/opt/spark/sbin/start-slave.sh"]
-        args: ["spark://spark-master:7077", "-c", "2", "-m", "8G", "-p", "8077"]
+        image: elopezdelara/miniconda3-spark:latest
+        command:
+        - start-slave.sh
+        args:
+        - spark://spark-master:7077
         resources:
           requests:
-            cpu: 2200m
-            memory: 8.2Gi
+            cpu: 100m
+            memory: 512Mi
         ports:
-        - containerPort: 8077
         - containerPort: 8081
