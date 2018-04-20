@@ -1,11 +1,28 @@
-apiVersion: apps/v1beta2 # for versions before 1.9.0 use apps/v1beta2
-kind: Deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-master
+  labels:
+    app: spark-master
+spec:
+  clusterIP: None
+  ports:
+  - name: master
+    port: 7077
+  - name: webui
+    port: 8080
+  selector:
+    app: spark-master
+---
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: spark-master
 spec:
   selector:
     matchLabels:
       app: spark-master
+  serviceName: spark-master
   replicas: 1
   template:
     metadata:

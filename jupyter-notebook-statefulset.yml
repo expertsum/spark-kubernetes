@@ -1,11 +1,28 @@
-apiVersion: apps/v1beta2 # for versions before 1.9.0 use apps/v1beta2
-kind: Deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-notebook
+  labels:
+    app: jupyter-notebook
+spec:
+  clusterIP: None
+  ports:
+  - name: notebook
+    port: 8888
+  - name: webui
+    port: 4040
+  selector:
+    app: jupyter-notebook
+---
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: jupyter-notebook
 spec:
   selector:
     matchLabels:
       app: jupyter-notebook
+  serviceName: jupyter-notebook
   replicas: 1
   template:
     metadata:
