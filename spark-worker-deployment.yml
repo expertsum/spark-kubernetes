@@ -15,6 +15,9 @@ spec:
       containers:
       - name: spark-worker
         image: elopezdelara/miniconda3-spark:latest
+        env:
+        - name: SPARK_NO_DAEMONIZE
+          value: "1"
         command:
         - start-slave.sh
         args:
