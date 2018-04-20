@@ -37,6 +37,13 @@ spec:
           value: "1"
         command:
         - start-master.sh
+        args:
+        - --properties-file /opt/conf/spark-defaults.conf
+        volumeMounts:
+          - name: config-volume
+            mountPath: /opt/conf
+          - name: data-volume
+            mountPath: /opt/notebooks
         resources:
           requests:
             cpu: 100m
@@ -44,3 +51,11 @@ spec:
         ports:
         - containerPort: 7077
         - containerPort: 8080
+      volumes:
+        - name: config-volume
+          configMap:
+            name: spark-defaults
+        - name: data-volume
+          gcePersistentDisk:
+            pdName: spark-cluster-data
+            fsType: ext4

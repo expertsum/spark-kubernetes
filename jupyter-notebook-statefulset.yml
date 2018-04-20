@@ -32,6 +32,9 @@ spec:
       containers:
       - name: jupyter-notebook
         image: elopezdelara/miniconda3-spark:latest
+        volumeMounts:
+        - name: data-volume
+          mountPath: /opt/notebooks
         command:
         - jupyter
         - notebook
@@ -49,3 +52,8 @@ spec:
         ports:
         - containerPort: 4040
         - containerPort: 8888
+      volumes:
+        - name: data-volume
+          gcePersistentDisk:
+            pdName: spark-cluster-data
+            fsType: ext4
