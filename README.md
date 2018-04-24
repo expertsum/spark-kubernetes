@@ -9,16 +9,19 @@ Kubernetes yaml files + scripts to create a Spark cluster on Google Kubernetes E
 - 1 GCE persistent disk to store jupyter notebooks
 
 ## Instructions
-### 1. Create project on the Google Cloud Platform
-### 2. Create cluster on Google Kubernetes Engine
-### 3. Export [service account json key](https://cloud.google.com/dataproc/docs/concepts/connectors/install-storage-connector) to a file named `gcskey.json` on the repository directory
-### 4. Configure kubectl command line access by running the following command:
 
-```$ gcloud container clusters get-credentials cluster-1 --zone [Zone ID] --project [Project ID]```
+1. Create project on the Google Cloud Platform
+2. Create cluster on Google Kubernetes Engine
+3. Export [service account json key](https://cloud.google.com/dataproc/docs/concepts/connectors/install-storage-connector) to a file named `gcskey.json` on the repository directory
+4. Configure kubectl command line access by running the following command:
 
-### 5. Create Compute Engine Disk named `spark-cluster-notebooks` on the same project and the same zone as the cluster
+```
+$ gcloud container clusters get-credentials cluster-1 --zone [Zone ID] --project [Project ID]
+```
 
-### 6. Create the cluster by running the following command:
+5. Create Compute Engine Disk named `spark-cluster-notebooks` on the same project and the same zone as the cluster
+
+6. Create the cluster by running the following command:
 
 ```
 $ ./create-cluster.sh
