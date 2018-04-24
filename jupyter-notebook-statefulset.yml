@@ -33,6 +33,10 @@ spec:
       - name: jupyter-notebook
         image: elopezdelara/miniconda3-spark:latest
         volumeMounts:
+        - name: config-volume
+          mountPath: /opt/conf
+        - name: keys-volume
+          mountPath: /opt/keys
         - name: data-volume
           mountPath: /opt/notebooks
         command:
@@ -44,7 +48,7 @@ spec:
         - --no-browser
         - --notebook-dir=/opt/notebooks
         - --allow-root
-        - --NotebookApp.password='sha1:9fd15fe4a4ce:0b0a713b2cc29caabb2228971971bae993cb86d2'
+        - --NotebookApp.token=''
         resources:
           requests:
             cpu: 100m
@@ -53,7 +57,13 @@ spec:
         - containerPort: 4040
         - containerPort: 8888
       volumes:
+        - name: config-volume
+          configMap:
+            name: spark-defaults
+        - name: keys-volume
+          configMap:
+            name: cluster-keys
         - name: data-volume
           gcePersistentDisk:
-            pdName: spark-cluster-data
+            pdName: spark-cluster-notebooks
             fsType: ext4

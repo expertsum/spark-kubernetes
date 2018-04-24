@@ -42,8 +42,8 @@ spec:
         volumeMounts:
           - name: config-volume
             mountPath: /opt/conf
-          - name: data-volume
-            mountPath: /opt/notebooks
+          - name: keys-volume
+            mountPath: /opt/keys
         resources:
           requests:
             cpu: 100m
@@ -55,7 +55,6 @@ spec:
         - name: config-volume
           configMap:
             name: spark-defaults
-        - name: data-volume
-          gcePersistentDisk:
-            pdName: spark-cluster-data
-            fsType: ext4
+        - name: keys-volume
+          configMap:
+            name: cluster-keys

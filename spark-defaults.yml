@@ -1,6 +1,9 @@
 apiVersion: v1
 data:
-  spark-defaults.conf: spark.ui.reverseProxy true
+  spark-defaults.conf: |-
+    spark.ui.reverseProxy true
+    spark.hadoop.google.cloud.auth.service.account.enable true
+    google.cloud.auth.service.account.json.keyfile /opt/keys/gcskey.json
 kind: ConfigMap
 metadata:
   name: spark-defaults
